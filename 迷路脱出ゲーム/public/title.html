@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+
+    <title>迷路脱出ゲーム</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>迷路脱出ゲーム</h1>
+        </div>
+        <div class="container_sub">
+            <h2>宝を探しに洞窟に入り込んでしまった一人の人間</h2>
+            <h2>それは悪夢の始まり。宝はあるわけもなく罠だった</h2>
+            <h2>無事に脱出して早く悪夢を終わらせてくれ</h2>
+        </div>
+    </header>
+    <section class="control">
+        <div class="control_box">
+            <h2 class="control_title">操作方法</h2>
+        </div>
+        <div class="explanation">
+            <p>十字キーを使ってPLAYしてください</p>
+            <p>モバイルでは端末を横にしてPLAYしてください</p>
+        </div>
+    </section>
+    <div class="conditions_box">
+        <div>
+            <h2 class="control_title">クリア条件</h2>
+            <div class="clera_box">
+                <p class="clera">時間内にMAP上の赤丸（ゴール）までたどり着くことが出来ればクリア</p>
+            </div>
+            <h2 class="control_title">注意</h2>
+            <p class="clera">MAP上の黄色●はアイテムです</p>
+            <p class="clera">クリアやゲームオーバー時に音がでるので音量注意</p>
+            <p class="clera">見えない地雷が仕掛けられているので注意してください</p>
+        </div>
+    </div>
+    <div>
+        <h2 class="control_title">下記のボタンを押してスタートしてください</h2>
+        <a class="start" href="game.html">PLAY</a>
+    </div>
+
+    <div id='output_box'>
+        <h2>ranking</h2>
+        <div id="output"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            // ここには自分のを使用してください
+            // ログイン.ランキング機能使用使用しない時は
+            // title.htmlとranking.htmlをpublicフォルダーから外してください
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        const db = firebase.firestore();
+
+        const collection = db.collection('ranking');
+        const output = document.getElementById('output');
+        let str = '';
+        collection.orderBy('time', 'desc').get()
+            .then((querySnapshot) => {
+                // console.log(collection);
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+
+                    str += '<p>' + data.name + " &emsp;" + data.time + '秒' + '</p>';
+
+                });
+                output.innerHTML = str;
+            });
+
+
+        // var user = firebase.auth().currentUser;
+
+        // if (user != null) {
+        //     user.providerData.forEach(function (profile) {
+        //         console.log("  Name: " + profile.displayName);
+        //         console.log("  Email: " + profile.email);
+        //     });
+        // }
+    </script>
+</body>
+
+</html>

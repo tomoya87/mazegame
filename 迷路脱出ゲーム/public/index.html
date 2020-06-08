@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/__/firebase/7.4.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.4.0/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script defer src="/__/firebase/init.js"></script>
+    <title>ログイン</title>
+</head>
+
+<body>
+    <p></p>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            // ここには自分のを使用してください
+            // ログイン.ランキング機能使用使用しない時は
+            // title.htmlとranking.htmlをpublicフォルダーから外してください
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <!-- // Initialize Firebase
+    firebase.initializeApp(firebaseConfig); -->
+    </script>
+
+    <script type="text/javascript">
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().getRedirectResult().then(function (result) {
+            if (result.credential) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // ...
+            }
+            // The signed-in user info.
+            var user = result.user;
+        }).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
+
+        var uiConfig = {
+            callbacks: {
+                signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+                    return true;
+                },
+                uiShown: function () {
+                    document.getElementById('loader').style.display = 'none';
+                }
+            },
+            signInFlow: 'popup',
+            signInSuccessUrl: 'title.html',
+            signInOptions: [
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            ],
+        };
+        ui.start('#firebaseui-auth-container', uiConfig);
+
+        if (user != null) {
+            user.providerData.forEach(function (profile) {
+                console.log("  Name: " + profile.displayName);
+                console.log("  Email: " + profile.email);
+            });
+        }
+    </script>
+</body>
+
+</html>

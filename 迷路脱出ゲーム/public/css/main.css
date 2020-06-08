@@ -1,0 +1,103 @@
+html{
+    background-image: url("../img/wall.jpg");
+}
+body{
+    width: 960px;
+    height: 1900px;
+    margin-right: auto;
+    margin-left : auto;
+    margin-top: 70px;
+    font-size: 16px;
+    text-align: center;
+    border: solid;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+/* rgba(255, 255, 255, 0.85) */
+
+header{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 70px;
+    
+
+}
+.container{
+  color: rgb(20, 20, 20);
+  font-size: 35px;
+  font-weight: bold;
+  font-family: Helvetica;
+  text-shadow: 
+    0 1px 0 rgb(252, 235, 2), 
+    0 2px 0 rgb(252, 235, 2), 
+    0 3px 0 rgb(252, 235, 2), 
+    0 4px 0 #b9b9b9, 
+    0 5px 0 #aaa, 
+    0 6px 1px rgba(0,0,0,.1), 
+    0 0 5px rgba(0,0,0,.1), 
+    0 1px 3px rgba(0,0,0,.3), 
+    0 3px 5px rgba(0,0,0,.2), 
+    0 5px 10px rgba(0,0,0,.25), 
+    0 10px 10px rgba(0,0,0,.2), 
+    0 20px 20px rgba(0,0,0,.15);
+}
+
+.container_sub{
+font-size:20px;
+}
+.control{
+    text-align: center;
+   
+}
+.control_box{
+  border-top: solid;
+}
+.control_title{
+font-size: 35px;
+color: rgb(5, 85, 196);
+margin-top: 30px;
+}
+.explanation{
+
+  font-size: 30px;
+   border-bottom:solid ;
+}
+.clera_box{
+  margin-bottom: 70px;
+}
+.clera{
+  font-size: 25px;
+}
+.conditions_box{
+  border-bottom: solid;
+}
+.start{
+  width: 300px;
+  height: 75px;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  margin-top: 50px;
+  color: #FFF;
+  background: #fd9535;/*色*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+  font-weight: bold;
+  font-size: 50px;
+  border: solid 2px #d27d00;/*線色*/
+}
+.start:active{
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+#output_box{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:40px ;
+  width: 40%;
+  height: 15%;
+  border: solid;
+  overflow:scroll;
+  overflow:hidden;
+  overflow-y: scroll;
+  overflow-y:scroll;
+}

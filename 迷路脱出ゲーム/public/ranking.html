@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>登録</title>
+</head>
+
+<body>
+    <div class="register">
+        <h3 class="register_form">登録フォーム</h3>
+        <div class="register_inp">
+            ニックネーム<input type="text" id="name">
+        </div>
+        <div class="register_inp">
+            クリアタイム<input type="number" id="time">
+        </div>
+        <div><button id="send">登録</button>
+            <a class="title_btn" type="button" href="title.html">タイトルへ</a></div>
+    </div>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            // ここには自分のを使用してください
+            // ログイン.ランキング機能使用使用しない時は
+            // title.htmlとranking.htmlをpublicフォルダーから外してください
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        const db = firebase.firestore();
+
+        const collection = db.collection('ranking');
+
+        const send = document.getElementById("send");
+        const name = document.getElementById("name");
+        const message = document.getElementById("time");
+
+        send.addEventListener('click', e => {
+
+            collection.doc().set({
+                name: name.value,
+                time: Number(time.value)
+            })
+                .then(doc => {
+                    // console.log(`${doc.id} added!`);
+                    name.value = '';
+                    time.value = '';
+                    name.focus();
+                    time.focus();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            alert('登録完了');
+        });
+
+        name.focus();
+        time.focus();
+
+
+
+    </script>
+</body>
+
+</html>
